@@ -9,7 +9,7 @@ const {
 
 
 const getUser = require('./getUser');
-const getUserById = require('./getUserById');
+const getUserById = require('./getUserByID');
 const createUser = require('./createUser');
 const updateUser = require('./editUser');
 const deleteUser = require('./deleteUser');
