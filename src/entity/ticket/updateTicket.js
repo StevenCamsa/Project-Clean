@@ -2,7 +2,7 @@ const updateTicketEntity = () => {
     return function edit({
         city_id,
         country_id,
-        member_id,
+        user_id,
         flight_id
 
     } = {}) {
@@ -12,8 +12,8 @@ const updateTicketEntity = () => {
         if (!country_id) {
             throw new Error("Please Enter Country.")
         }
-        if (!member_id) {
-            throw new Error("Please Enter Member.")
+        if (!user_id) {
+            throw new Error("Please Enter User.")
         }
         if (!flight_id) {
             throw new Error("Please Enter Flight.")
@@ -22,7 +22,7 @@ const updateTicketEntity = () => {
         return Object.freeze({
             getCityId: () => city_id,
             getCountryId: () => country_id,
-            getMemberId: () => member_id,
+            getUserId: () => user_id,
             getFlightId: () => flight_id
         });
     };

@@ -14,7 +14,7 @@ const updateTicket = ({ ticketdb }) => {
             ticket_id: ticket_id,
             city_id: result.getCityId(),
             country_id: result.getCountryId(),
-            member_id: result.getMemberId(),
+            user_id: result.getUserId(),
             departure_time: formattedDepartureTime,
             date: formattedDate,
             flight_id: result.getFlightId()
