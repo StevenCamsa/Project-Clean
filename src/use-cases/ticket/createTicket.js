@@ -5,7 +5,7 @@ const createTicket = ({ ticketdb }) => {
     return async function create(ticketInfo) {
         const ticket = makeTicket(ticketInfo);
 
-        const {user_id, departure_time, date} = ticketInfo
+        const {user_id, date} = ticketInfo
 
         const exists = await ticketdb.isExisting(user_id)
         .catch(e=>console.log(e))
@@ -13,17 +13,13 @@ const createTicket = ({ ticketdb }) => {
         if(exists.rowCount > 0){
             throw new Error("User already has booked a ticket")
         }
-        const formattedDepartureTime = moment(departure_time).format('YYYY-DD-MM');
         const formattedDate = moment(date).format('YYYY-DD-MM');
 
         const result = await ticketdb.createTicket({
-            city_id: ticket.getCityId(),
-            country_id: ticket.getCountryId(),
+
             user_id: ticket.getUserId(),
             seat_no: generateSeatNo(),
-            departure_time: formattedDepartureTime,
             date:formattedDate,
-            flight_id: ticket.getFlightId()
         })
         .catch(e => console.log(e));
 
