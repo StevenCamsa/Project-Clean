@@ -13,7 +13,7 @@ const createTicket = ({ ticketdb }) => {
         if(exists.rowCount > 0){
             throw new Error("User already has booked a ticket")
         }
-        const formattedDate = moment(date).format('YYYY-DD-MM');
+        const formattedDate = moment(date).format('YYYY-MM-DD');
 
         const result = await ticketdb.createTicket({
 
