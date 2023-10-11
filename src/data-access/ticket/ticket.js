@@ -2,6 +2,7 @@ const ticketQuery = ({db}) => {
     return Object.freeze({
         getTicket,
         getTicketById,
+        getTicketByUser,
         createTicket,
         updateTicket,
         deleteTicket,
@@ -34,6 +35,36 @@ async function getTicket() {
         console.log("Error "+ error);
     }
 }
+
+
+async function getTicketByUser(user_id) {
+    const data = await db();
+    const sql = `SELECT t.ticket_id, c.city_id, c.city_name, co.country_id, co.country_name, u.user_id, g.group_id,g.group_name,u.fname,u.lname,t.seat_no,t.date, f.flight_id,f.flight_number,t.status
+    FROM 
+        public.ticket t
+    LEFT JOIN
+        public.users u ON u.user_id = t.user_id
+	LEFT JOIN
+        public.member m ON m.user_id = u.user_id
+    LEFT JOIN 
+        public.groups g ON m.group_id = g.group_id
+    LEFT JOIN
+        public.flight f ON f.city_id = g.city_id AND f.country_id = g.country_id
+	LEFT JOIN 
+        public.cities c ON c.city_id = g.city_id
+	LEFT JOIN 
+        public.country co ON co.country_id = g.country_id
+    WHERE u.user_id = $1`;
+    const params = [user_id]
+    try{
+        const result = await data.query(sql, params);
+        return result; 
+    } catch(error) {
+        console.log("Error "+ error);
+        
+    }
+}
+
 
 async function getTicketById(ticket_id) {
     const data = await db();

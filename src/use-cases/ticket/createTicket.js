@@ -14,7 +14,6 @@ const createTicket = ({ ticketdb }) => {
             throw new Error("User already has booked a ticket")
         }
         const formattedDate = moment(date).format('YYYY-MM-DD');
-
         const result = await ticketdb.createTicket({
 
             user_id: ticket.getUserId(),
