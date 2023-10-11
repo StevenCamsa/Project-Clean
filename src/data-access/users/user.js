@@ -17,14 +17,7 @@ async function getUsers() {
     LEFT JOIN member AS m ON m.user_id = u.user_id
     LEFT JOIN roles AS r ON r.role_id = u.role_id
     LEFT JOIN groups AS g ON g.group_id = m.group_id
-    WHERE u.status = 'active'
-    GROUP BY
-        u.user_id,
-        u.fname,
-        u.lname,
-        r.role_id,
-        m.member_id,
-        g.group_name
+    WHERE u.status = 'active' AND m.status = 'active'
     ORDER BY u.user_id` ;
     try{
         const result = await data.query(sql);
@@ -41,14 +34,7 @@ async function getUserById(user_id) {
     LEFT JOIN member AS m ON m.user_id = u.user_id
     LEFT JOIN roles AS r ON r.role_id = u.role_id
     LEFT JOIN groups AS g ON g.group_id = m.group_id
-    WHERE u.user_id = $1 AND u.status = 'active'
-    GROUP BY
-        u.user_id,
-        u.fname,
-        u.lname,
-        r.role_id,
-        m.member_id,
-        g.group_name
+    WHERE u.user_id = $1 AND u.status = 'active' AND m.status = 'active'
     `;
     const params = [user_id] 
     try{

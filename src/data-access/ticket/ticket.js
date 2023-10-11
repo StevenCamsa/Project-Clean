@@ -27,7 +27,7 @@ async function getTicket() {
         public.cities c ON c.city_id = g.city_id
 	LEFT JOIN 
         public.country co ON co.country_id = g.country_id
-    WHERE t.status = 'active' ORDER BY t.ticket_id`;
+    WHERE t.status = 'active' AND m.status = 'active' ORDER BY t.ticket_id`;
     try{
         const result = await data.query(sql);
         return result.rows; 
@@ -83,7 +83,7 @@ async function getTicketById(ticket_id) {
         public.cities c ON c.city_id = g.city_id
 	LEFT JOIN 
         public.country co ON co.country_id = g.country_id
-    WHERE ticket_id = $1 AND t.status = 'active'`;
+    WHERE ticket_id = $1 AND t.status = 'active' AND m.status = 'active'`;
     const params = [ticket_id]
     try{
         const result = await data.query(sql, params);
