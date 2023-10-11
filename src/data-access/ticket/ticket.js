@@ -52,7 +52,7 @@ async function getTicketById(ticket_id) {
         public.cities c ON c.city_id = g.city_id
 	LEFT JOIN 
         public.country co ON co.country_id = g.country_id
-    WHERE ticket_id = $1 AND t.status = 'active'`;
+    WHERE ticket_id = $1`;
     const params = [ticket_id]
     try{
         const result = await data.query(sql, params);
