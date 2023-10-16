@@ -1,4 +1,6 @@
 const groupdb = require("../../data-access/groups/index.js");
+const citiesdb = require("../../data-access/cities/index.js");
+const countrydb = require("../../data-access/country/index.js");
 
 const getGroup = require("./getGroup");
 const getGroupById = require("./getGroupById");
@@ -11,8 +13,8 @@ const editGroupEntity = require("../../entity/group/index.js");
 
 const getGroupUseCase = getGroup({ groupdb });
 const getGroupByIdUseCase = getGroupById({ groupdb });
-const createGroupUseCase = createGroup({makeGroupEntity, groupdb });
-const updateGroupUseCase = updateGroup({editGroupEntity, groupdb });
+const createGroupUseCase = createGroup({makeGroupEntity, groupdb, citiesdb, countrydb });
+const updateGroupUseCase = updateGroup({editGroupEntity, groupdb , citiesdb, countrydb });
 const deleteGroupUseCase = deleteGroup({ groupdb });
 
 const services = Object.freeze({

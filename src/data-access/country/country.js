@@ -3,6 +3,7 @@ const countryQuery = ({db}) => {
         getCountry,
         getCountryById,
         isExisting,
+        isCountryExisting,
         createCountry,
         updateCountry,
         deleteCountry
@@ -36,6 +37,21 @@ async function getCountryById(city_id) {
 async function isExisting (country_id){
     const data = await db();
     const sql = `SELECT * FROM country WHERE country_name = $1`;
+    const params = [country_id]
+    
+    try{
+        const result = await data.query(sql, params);
+        return result; 
+        
+    } catch(error) {
+        console.log("Error "+ error);
+        
+    }
+}
+
+async function isCountryExisting (country_id){
+    const data = await db();
+    const sql = `SELECT * FROM country WHERE country_id = $1`;
     const params = [country_id]
     
     try{
