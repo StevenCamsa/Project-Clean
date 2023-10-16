@@ -36,7 +36,7 @@ async function getCitiesById(city_id) {
 
 async function isExisting (city_id){
     const data = await db();
-    const sql = `SELECT * FROM cities WHERE city_name = $1`;
+    const sql = `SELECT * FROM cities WHERE city_name = $1 AND status = 'active'`;
     const params = [city_id]
     
     try{
@@ -51,7 +51,7 @@ async function isExisting (city_id){
 
 async function isCitiesExisting (city_id){
     const data = await db();
-    const sql = `SELECT * FROM cities WHERE city_id = $1`;
+    const sql = `SELECT * FROM cities WHERE city_id = $1 AND status = 'active'`;
     const params = [city_id]
     
     try{
