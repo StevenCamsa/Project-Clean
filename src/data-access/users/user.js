@@ -17,7 +17,7 @@ async function getUsers() {
     LEFT JOIN member AS m ON m.user_id = u.user_id
     LEFT JOIN roles AS r ON r.role_id = u.role_id
     LEFT JOIN groups AS g ON g.group_id = m.group_id
-    WHERE u.status = 'active' AND m.status = 'active'
+    WHERE u.status = 'active' AND (m.status = 'active' OR m.status IS NULL)
     ORDER BY u.user_id` ;
     try{
         const result = await data.query(sql);
